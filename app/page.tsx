@@ -238,3 +238,22 @@ export default function Home() {
     </div>
   );
 }
+
+export async function getServerSideProps() {
+  try {
+    // ...your data fetching logic...
+    // For example, fetching data from an API or database
+    // const data = await fetchDataFromAPI();
+    // return { props: { data } };
+    // Replace with your actual data fetching logic
+    // For now, we return an empty object as props
+    // This is just a placeholder; you can modify it as needed
+    // If you have specific props to return, replace the empty object with your data
+    // Example:
+    //
+    return { props: { /* your props */ } };
+  } catch (error) {
+    console.error('Error fetching admin page data:', error);
+    return { props: { error: 'Failed to load data' } };
+  }
+}
