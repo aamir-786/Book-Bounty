@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { User, BookOpen, Award, Settings, TrendingUp, Calendar, Star, Trophy, Target, Book, Clock, BarChart3 } from 'lucide-react';
+import { User, BookOpen, Award, Settings, TrendingUp, Calendar, Star, Trophy, Target, Book, Clock, BarChart3, Icon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -72,19 +72,22 @@ export default function Dashboard() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
+                      <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                    </div>
+                    <Icon className={`h-8 w-8 ${stat.color}`} />
                   </div>
-                  <stat.icon className={`h-8 w-8 ${stat.color}`} />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Main Content */}
@@ -217,19 +220,22 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {achievements.map((achievement, index) => (
-                      <div key={index} className={`p-4 rounded-lg border ${achievement.earned ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200'}`}>
-                        <div className="flex items-center space-x-3">
-                          <div className={`p-2 rounded-full ${achievement.earned ? 'bg-emerald-100' : 'bg-gray-100'}`}>
-                            <achievement.icon className={`h-5 w-5 ${achievement.earned ? 'text-emerald-600' : 'text-gray-400'}`} />
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-gray-900">{achievement.name}</h4>
-                            <p className="text-sm text-gray-600">{achievement.description}</p>
+                    {achievements.map((achievement, index) => {
+                      const AchievementIcon = achievement.icon;
+                      return (
+                        <div key={index} className={`p-4 rounded-lg border ${achievement.earned ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200'}`}>
+                          <div className="flex items-center space-x-3">
+                            <div className={`p-2 rounded-full ${achievement.earned ? 'bg-emerald-100' : 'bg-gray-100'}`}>
+                              <AchievementIcon className={`h-5 w-5 ${achievement.earned ? 'text-emerald-600' : 'text-gray-400'}`} />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-gray-900">{achievement.name}</h4>
+                              <p className="text-sm text-gray-600">{achievement.description}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>
